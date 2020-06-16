@@ -63,7 +63,8 @@ class Localize {
       }
       _collection = {};
       Map<int, String> num2lang = {};
-      List<List> converted = const CsvToListConverter().convert(csv);
+      csv = csv.replaceAll("\r\n", "\n").replaceAll("\r", "\n");
+      List<List> converted = const CsvToListConverter().convert(csv, eol: "\n");
       for (int y = 1; y < converted.length; y++) {
         List line = converted[y];
         if (line == null) continue;

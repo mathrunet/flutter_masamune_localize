@@ -1,3 +1,7 @@
+## [0.2.6] - Update README (2020.06.16)
+
+* Fixed a bug that CSV cannot be analyzed by line feed code.
+
 ## [0.2.5+1] - Update README (2020.06.09)
 
 * Formatting.
