@@ -49,8 +49,9 @@ class Localize {
   ///
   /// [path]: Translation file path.
   /// [timeout]: Timeout time.
+  /// [language]: Default language.
   static Future initialize(String path,
-      {Duration timeout = const Duration(seconds: 5)}) async {
+      {Duration timeout = const Duration(seconds: 5), String languge}) async {
     try {
       if (path == null || path.length <= 0) {
         debugPrint("CSV File path is empty.");
@@ -87,9 +88,13 @@ class Localize {
       }
       Locale locale = await DeviceLocale.getCurrentLocale();
       if (locale == null) return;
-      String language = locale.languageCode;
-      if (language == null || language.length <= 0) language = "en";
-      _language = language.split("_")?.first;
+      if (language == null) {
+        language = locale.languageCode;
+        if (language == null || language.length <= 0) language = "en";
+        _language = language.split("_")?.first;
+      } else {
+        _language = languge;
+      }
       __document = _collection[language];
       _isInitialized = true;
     } catch (e) {

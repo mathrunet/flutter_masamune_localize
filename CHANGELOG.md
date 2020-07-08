@@ -1,3 +1,7 @@
+## [0.2.7] - Update README (2020.07.08)
+
+* Add an extension method to get the week string.
+
 ## [0.2.6] - Update README (2020.06.16)
 
 * Fixed a bug that CSV cannot be analyzed by line feed code.
