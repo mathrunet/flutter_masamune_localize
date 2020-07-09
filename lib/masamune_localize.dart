@@ -8,6 +8,7 @@
 /// [YouTube]: https://www.youtube.com/c/mathrunetchannel
 library masamune.localize;
 
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:csv/csv.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';

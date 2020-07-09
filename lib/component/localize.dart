@@ -6,7 +6,7 @@ part of masamune.localize;
 ///
 /// After that, display the translated text by executing the [get()] method.
 class Localize {
-  static const String _defaultLanguage = "en";
+  static const String _defaultLoacle = "en_US";
   static Map<String, Map<String, String>> _collection;
   static Map<String, String> get _document {
     if (__document == null) __document = _collection[language];
@@ -18,17 +18,27 @@ class Localize {
   /// Language settings for translation.
   static String get language {
     if (_language != null) return _language;
-    return _defaultLanguage;
-  }
-
-  /// Set language settings.
-  ///
-  /// [language]: Language.
-  static set language(String language) {
-    _language = language;
+    _language = locale.split("_")?.first;
     __document = _collection[_language];
+    return _language;
   }
 
+  /// Language locale setting.
+  static String get locale {
+    if (_locale != null) return _locale;
+    return _defaultLoacle;
+  }
+
+  /// Language locale setting.
+  ///
+  /// [locale]: Locale.
+  static set locale(String locale) {
+    _locale = locale;
+    _language = locale.split("_")?.first;
+    __document = _collection[language];
+  }
+
+  static String _locale;
   static String _language;
 
   /// True if initialization has been completed.
@@ -49,9 +59,9 @@ class Localize {
   ///
   /// [path]: Translation file path.
   /// [timeout]: Timeout time.
-  /// [language]: Default language.
+  /// [locale]: Default locale.
   static Future initialize(String path,
-      {Duration timeout = const Duration(seconds: 5), String languge}) async {
+      {Duration timeout = const Duration(seconds: 5), String locale}) async {
     try {
       if (path == null || path.length <= 0) {
         debugPrint("CSV File path is empty.");
@@ -86,16 +96,19 @@ class Localize {
           }
         }
       }
-      Locale locale = await DeviceLocale.getCurrentLocale();
-      if (locale == null) return;
-      if (language == null) {
-        language = locale.languageCode;
-        if (language == null || language.length <= 0) language = "en";
-        _language = language.split("_")?.first;
+      Locale deviceLocale = await DeviceLocale.getCurrentLocale();
+      if (deviceLocale == null) return;
+      if (locale == null || locale.length <= 0) {
+        _locale = deviceLocale.languageCode;
+        if (_locale == null || _locale.length <= 0) _locale = "en_US";
+        initializeDateFormatting(_locale);
+        _language = _locale.split("_")?.first;
       } else {
-        _language = languge;
+        _locale = locale;
+        initializeDateFormatting(locale);
+        _language = _locale.split("_")?.first;
       }
-      __document = _collection[language];
+      __document = _collection[_language];
       _isInitialized = true;
     } catch (e) {
       print(e.toString());

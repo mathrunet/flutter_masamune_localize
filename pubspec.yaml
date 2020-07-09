@@ -2,7 +2,7 @@ name: masamune_localize
 description: >-
   Library that provides the translation function of Masamune framework.
   Manage translation data with Google SpreadSheet.
-version: 0.2.7+3
+version: 0.2.8
 homepage: https://mathru.net
 repository: https://github.com/mathrunet/flutter_masamune_localize
 
@@ -13,6 +13,7 @@ dependencies:
   flutter:
     sdk: flutter
   # Data
+  intl: ^0.16.1
   csv: ^4.0.3
   # Device
   flutter_device_locale: ^0.4.0

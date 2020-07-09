@@ -1,3 +1,7 @@
+## [0.2.8] - Update README (2020.07.09)
+
+* Changed language to locale setting.
+
 ## [0.2.7] - Update README (2020.07.08)
 
 * Add an extension method to get the week string.
