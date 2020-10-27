@@ -1,3 +1,7 @@
+## [0.5.0] - Update README (2020.10.27)
+
+* Raised the minimum version of Flutter to 2.8.0
+
 ## [0.2.8] - Update README (2020.07.09)
 
 * Changed language to locale setting.
